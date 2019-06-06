@@ -44,6 +44,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+    // Mockito Lib
+    testImplementation 'org.mockito:mockito-core:2.7.22'
+    androidTestImplementation 'org.mockito:mockito-android:2.7.22'
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
+
     // SDP Dependencies for UI to All compatible devices
     implementation "com.intuit.sdp:sdp-android:$sdp_lib_version"
 
@@ -65,6 +70,5 @@ dependencies {
     implementation "com.google.dagger:dagger-android:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
-
 
 }

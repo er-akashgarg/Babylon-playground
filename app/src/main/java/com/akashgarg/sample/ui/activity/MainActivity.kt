@@ -27,6 +27,7 @@ class MainActivity : BaseActivity(), BaseView, PostView, UserPostAdapter.OnItemC
     //injecting retrofit
     @Inject
     lateinit var retrofit: Retrofit
+
     private lateinit var adapter: UserPostAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
