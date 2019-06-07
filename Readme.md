@@ -48,7 +48,7 @@ The Model-View-Presenter pattern allows to separate the presentation layer from 
   
 # Lets try to setup MVP architecture with Kotlin, RxJava2, Retrofit, Dagger2 in app .
   
-  ##This project structured into following setup or packages like :
+  **This project structured into following setup or packages like :**
   
   **. Retrofit:** is a Rest Client. Retrofit depend on OkHttp.
   
@@ -63,7 +63,7 @@ The Model-View-Presenter pattern allows to separate the presentation layer from 
   **. utils:** Some tweaks.
   
   
-  ##We need to create Api Module for Retrofit Setup
+  **We need to create Api Module for Retrofit Setup**
   
   addConvertorFactory()- I used gson converter for data serialization but if you want, you can create custom convertor, use moshi library or etc.
   
