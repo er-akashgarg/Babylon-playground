@@ -213,7 +213,12 @@ The Model-View-Presenter pattern allows to separate the presentation layer from 
   **API URL-:**  http://jsonplaceholder.typicode.com/posts
   **Method :**  GET  
   
-  ##Screen Shots: 
-        
-   /Volumes/Akash Data/MyProjects/Sample/app/screenshots/shot1.png
+  **Screen Shots:** 
+   
+ ![Screenshot](https://github.com/er-akashgarg/Babylon-playground/blob/master/app/screenshots/shot1.png)
+ ![Screenshot](https://github.com/er-akashgarg/Babylon-playground/blob/master/app/screenshots/shot2.png)
+ ![Screenshot](https://github.com/er-akashgarg/Babylon-playground/blob/master/app/screenshots/shot3.png)
+
+
+   
 
