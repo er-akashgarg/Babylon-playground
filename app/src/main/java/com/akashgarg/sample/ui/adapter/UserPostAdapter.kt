@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.akashgarg.sample.R
-import com.akashgarg.sample.model.PostResponseModel
+import com.akashgarg.sample.model.post.PostResponseModel
 import kotlinx.android.synthetic.main.adapter_item.view.*
 
 open class UserPostAdapter(

@@ -1,8 +1,6 @@
 package com.akashgarg.sample.presenter
 
-import android.annotation.SuppressLint
-import android.util.Log
-import com.akashgarg.sample.model.post.PostResponseModel
+import com.akashgarg.sample.model.PostResponseModel
 import com.akashgarg.sample.restclient.apis.Api
 import com.akashgarg.sample.view.base.BaseView
 import com.akashgarg.sample.view.postsivew.PostView
@@ -10,40 +8,57 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
+import org.mockito.junit.MockitoJUnitRunner
 import retrofit2.Retrofit
 
-class SinglePostPresenter(
-    private var retrofit: Retrofit,
-    var baseView: BaseView,
-    var postView: PostView,
-    var pid: Int) {
 
-    private var TAG = SinglePostPresenter::class.java.simpleName
+@RunWith(MockitoJUnitRunner::class)
+class UsersPostPresenterTest {
 
-    init {
+    @Mock
+    lateinit var retrofit: Retrofit
+
+    @Mock
+    lateinit var baseView: BaseView
+
+    @Mock
+    lateinit var postView: PostView
+
+
+    @Before
+    fun setUp() {
+        MockitoAnnotations.initMocks(this)
         baseView.showLoading()
-        getPost()
     }
 
-
-    @SuppressLint("CheckResult")
+    @Test
     fun getPost() {
+        getPostsList()
+        baseView.dismissLoading()
+    }
+
+    @Test
+    fun getPostsList() {
         getPostsObservable()
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(getObserver())
     }
 
-    private fun getObserver(): DisposableObserver<PostResponseModel> {
-        return object : DisposableObserver<PostResponseModel>() {
+    private fun getObserver(): DisposableObserver<List<PostResponseModel>> {
+        return object : DisposableObserver<List<PostResponseModel>>() {
 
-            override fun onNext(data: PostResponseModel) {
+            override fun onNext(data: List<PostResponseModel>) {
                 baseView.dismissLoading()
                 postView.successResult(data)
             }
 
             override fun onComplete() {
-
             }
 
             override fun onError(e: Throwable) {
@@ -52,9 +67,9 @@ class SinglePostPresenter(
         }
     }
 
-    private fun getPostsObservable(): Observable<PostResponseModel> {
-        Log.e(TAG, "-----retrofit--: $retrofit")
+    private fun getPostsObservable(): Observable<List<PostResponseModel>> {
         val api = retrofit.create(Api::class.java)
-        return api.post(pid)
+        return  api.postsList
     }
 }
+

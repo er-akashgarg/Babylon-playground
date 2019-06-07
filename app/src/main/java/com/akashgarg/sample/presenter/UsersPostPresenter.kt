@@ -1,8 +1,8 @@
 package com.akashgarg.sample.presenter
 
 import android.annotation.SuppressLint
+import com.akashgarg.sample.model.post.PostResponseModel
 import com.akashgarg.sample.restclient.apis.Api
-import com.akashgarg.sample.model.PostResponseModel
 import com.akashgarg.sample.view.base.BaseView
 import com.akashgarg.sample.view.postsivew.PostView
 import io.reactivex.Observable

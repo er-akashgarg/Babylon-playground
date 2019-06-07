@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.akashgarg.sample.app.MyApplication
-import com.akashgarg.sample.model.PostResponseModel
+import com.akashgarg.sample.model.post.PostResponseModel
 import com.akashgarg.sample.presenter.SinglePostPresenter
 import com.akashgarg.sample.presenter.UsersPostPresenter
 import com.akashgarg.sample.ui.adapter.UserPostAdapter

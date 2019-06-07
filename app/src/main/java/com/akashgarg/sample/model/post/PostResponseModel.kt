@@ -1,4 +1,4 @@
-package com.akashgarg.sample.model
+package com.akashgarg.sample.model.post
 
 import java.io.Serializable
 

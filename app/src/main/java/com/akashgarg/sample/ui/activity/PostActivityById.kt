@@ -3,7 +3,7 @@ package com.akashgarg.sample.ui.activity
 import android.os.Bundle
 import android.util.Log
 import com.akashgarg.sample.R
-import com.akashgarg.sample.model.PostResponseModel
+import com.akashgarg.sample.model.post.PostResponseModel
 import kotlinx.android.synthetic.main.activity_post.*
 
 class PostActivityById : BaseActivity() {
