@@ -11,7 +11,7 @@ In Android we have a problem arising from the fact that activities are closely c
 The Model-View-Presenter pattern allows to separate the presentation layer from the logic, so that everything about how the interface works is separated from how we represent it on screen.
 
 # Language: Kotlin : 
-      implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 # There are some third party dependencies which is used in this application:
 
@@ -48,28 +48,28 @@ The Model-View-Presenter pattern allows to separate the presentation layer from 
   
 # Lets try to setup MVP architecture with Kotlin, RxJava2, Retrofit, Dagger2 in app .
   
-  This project structured into following setup or packages like :
+  ##This project structured into following setup or packages like :
   
-  . Retrofit: is a Rest Client. Retrofit depend on OkHttp.
+  **. Retrofit:** is a Rest Client. Retrofit depend on OkHttp.
   
-  . Dagger(di): used for dependency injection.
+  **. Dagger(di):** used for dependency injection.
   
-  . RxJava: Reactive Extensions.
+  **. RxJava:** Reactive Extensions.
   
-  . .models: Data models.
+  **. models:** Data models.
   
-  . ui: Activities and also with presenter and contract.
+  **. ui:** Activities and also with presenter and contract.
   
-  . utils: Some tweaks.
+  **. utils:** Some tweaks.
   
   
-  . We need to create Api Module for Retrofit Setup.
+  ##We need to create Api Module for Retrofit Setup
   
-  addConvertorFactory() I used gson converter for data serilazation but if you want, you can create custom convertor, use moshi library or etc.
+  addConvertorFactory()- I used gson converter for data serialization but if you want, you can create custom convertor, use moshi library or etc.
   
   addCallAdapterFactory() support service method return types. I added RxJava2CallAdapterFactory.create()
   
-  Lets start to create the api module!
+  **Lets start to create the api module!**
   
      @Module
      public class ApiModule {
@@ -116,7 +116,7 @@ The Model-View-Presenter pattern allows to separate the presentation layer from 
       }
   }
   
-  We need to make an api call so create Service interface. I used Observable for this.  
+  **We need to make an api call so create Service interface. I used Observable for this.**  
   
     import com.akashgarg.sample.model.PostResponseModel
     import com.akashgarg.sample.utils.Urls
@@ -133,7 +133,7 @@ The Model-View-Presenter pattern allows to separate the presentation layer from 
   
   }
   
-  Now, we can go on Presenter Layer, Contract for View and Presenter interfaces…
+  **Now, we can go on Presenter Layer, Contract for View and Presenter interfaces…**
   
        interface BaseView {
         fun showLoading()
@@ -144,7 +144,7 @@ The Model-View-Presenter pattern allows to separate the presentation layer from 
          fun failure(message: String?)
      }
      
- Lets create the presenter class;
+ **Lets create the presenter class:**
  
     import android.annotation.SuppressLint
     import com.akashgarg.sample.restclient.apis.Api
@@ -196,7 +196,7 @@ The Model-View-Presenter pattern allows to separate the presentation layer from 
        }
     }    
 
-ApplicationComponent class: Finally We can bind it with Builder.
+**ApplicationComponent class: Finally We can bind it with Builder.**
 
     import com.akashgarg.sample.di.module.ApiModule;
     import com.akashgarg.sample.di.module.AppModule;
@@ -210,7 +210,7 @@ ApplicationComponent class: Finally We can bind it with Builder.
        void inject(MainActivity activity);
      }    
 
- GET http://jsonplaceholder.typicode.com/posts :
-  Method : GET           
+  **API URL-:**  http://jsonplaceholder.typicode.com/posts
+  **Method :**  GET        
   
 
