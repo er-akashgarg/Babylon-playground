@@ -216,6 +216,7 @@ The Model-View-Presenter pattern allows to separate the presentation layer from 
   **Unit test With Mockito**
   
    **Unit testing** is an important part of any product development lifecycle. The main purpose of unit testing is to test components in isolation from each other and that is how our code should be written as well.
+   
    **Mockito** can be used as a mocking framework in Android. It allows us to fake external interactions with annotation @Mock.
     A mock object is a dummy implementation for an interface or a class in which you define the output of certain method calls. Mock objects are configured to perform a certain behavior during a test.
   
