@@ -3,4 +3,5 @@
     <string name="babylon_healthcare_medical"><![CDATA[Babylon Healthcare & Medical]]></string>
     <string name="body">Body :</string>
     <string name="title">Title :</string>
+    <string name="error_msg">Something error! Please try again.</string>
 </resources>

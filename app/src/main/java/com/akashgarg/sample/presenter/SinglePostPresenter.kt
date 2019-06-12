@@ -1,7 +1,6 @@
 package com.akashgarg.sample.presenter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import com.akashgarg.sample.model.post.PostResponseModel
 import com.akashgarg.sample.restclient.apis.Api
 import com.akashgarg.sample.view.base.BaseView
@@ -53,7 +52,6 @@ class SinglePostPresenter(
     }
 
     private fun getPostsObservable(): Observable<PostResponseModel> {
-        Log.e(TAG, "-----retrofit--: $retrofit")
         val api = retrofit.create(Api::class.java)
         return api.post(pid)
     }

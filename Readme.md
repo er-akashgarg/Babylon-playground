@@ -213,6 +213,104 @@ The Model-View-Presenter pattern allows to separate the presentation layer from 
   **API URL-:**  http://jsonplaceholder.typicode.com/posts
   **Method :**  GET  
   
+  **Unit test With Mockito**
+  
+   **Unit testing** is an important part of any product development lifecycle. The main purpose of unit testing is to test components in isolation from each other and that is how our code should be written as well.
+   **Mockito** can be used as a mocking framework in Android. It allows us to fake external interactions with annotation @Mock.
+    A mock object is a dummy implementation for an interface or a class in which you define the output of certain method calls. Mock objects are configured to perform a certain behavior during a test.
+  
+    package com.akashgarg.sample.presenter
+    
+    import com.akashgarg.sample.model.post.PostResponseModel
+    import com.akashgarg.sample.restclient.apis.Api
+    import com.akashgarg.sample.ui.activity.MainActivity
+    import com.akashgarg.sample.utils.Urls
+    import com.akashgarg.sample.view.base.BaseView
+    import com.akashgarg.sample.view.postsivew.PostView
+    import com.google.gson.Gson
+    import io.reactivex.Observable
+    import io.reactivex.android.plugins.RxAndroidPlugins
+    import io.reactivex.android.schedulers.AndroidSchedulers
+    import io.reactivex.observers.TestObserver
+    import io.reactivex.schedulers.Schedulers
+    import okhttp3.OkHttpClient
+    import org.junit.Before
+    import org.junit.Test
+    import org.junit.runner.RunWith
+    import org.mockito.Mock
+    import org.mockito.MockitoAnnotations
+    import org.mockito.junit.MockitoJUnitRunner
+    import retrofit2.Retrofit
+    import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+    import retrofit2.converter.gson.GsonConverterFactory
+  
+      @RunWith(MockitoJUnitRunner::class)
+      class UsersPostPresenterTest {
+  
+      private val STRING_UNKNOWN_ERROR = "STRING_UNKNOWN_ERROR"
+      @Mock
+      lateinit var baseView: BaseView
+  
+      @Mock
+      lateinit var postView: PostView
+  
+      @Mock
+      lateinit var mActivity: MainActivity
+  
+      lateinit var usersPostPresenter: UsersPostPresenter
+  
+      lateinit var retrofit: Retrofit
+  
+      @Before
+      fun setUp() {
+  
+          //init mock
+          MockitoAnnotations.initMocks(this)
+  
+          RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler -> Schedulers.trampoline() }
+  
+          retrofit = Retrofit.Builder()
+              .addConverterFactory(GsonConverterFactory.create(Gson()))
+              .baseUrl(Urls.BASE_URL)
+              .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+              .client(OkHttpClient())
+              .build()
+  
+          mActivity.showLoading()
+          usersPostPresenter = UsersPostPresenter(retrofit, baseView, postView)
+      }
+  
+      @Test
+      fun getPostList_WhenApiInvoke() {
+          getPostsList()
+          mActivity.dismissLoading()
+      }
+  
+      @Test
+      fun getPostsList() {
+  
+      // Mockito.`when`(mActivity.getString(com.akashgarg.sample.R.string.error_msg)).thenReturn(STRING_UNKNOWN_ERROR)
+  
+          // Create the testObserver for response
+          val observer = TestObserver<List<PostResponseModel>>()
+  
+          getPostsObservable()
+              .subscribeOn(Schedulers.newThread())
+              .observeOn(AndroidSchedulers.mainThread())
+              .subscribeWith(observer)
+  
+          // dispose the Observer Or CleanUp
+          observer.dispose()
+      }
+  
+      private fun getPostsObservable(): Observable<List<PostResponseModel>> {
+          val api = retrofit.create(Api::class.java)
+          return api.postsList
+      }
+  }
+
+  
+  
   **Screen Shots:** 
    
  ![Screenshot](https://github.com/er-akashgarg/Babylon-playground/blob/master/app/screenshots/shot1.png)

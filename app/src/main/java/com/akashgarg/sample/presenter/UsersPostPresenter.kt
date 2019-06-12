@@ -15,6 +15,7 @@ class UsersPostPresenter(private var retrofit: Retrofit, var baseView: BaseView,
 
     private var TAG = UsersPostPresenter::class.java.simpleName
 
+
     init {
         baseView.showLoading()
         getPostsList()
@@ -37,11 +38,11 @@ class UsersPostPresenter(private var retrofit: Retrofit, var baseView: BaseView,
                 postView.successResult(data)
             }
 
-            override fun onComplete() {
-            }
-
             override fun onError(e: Throwable) {
                 postView.failure(e.message)
+            }
+
+            override fun onComplete() {
             }
         }
     }

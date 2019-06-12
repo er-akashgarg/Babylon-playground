@@ -1,5 +1,6 @@
 package com.akashgarg.sample.presenter
 
+import android.annotation.SuppressLint
 import com.akashgarg.sample.model.post.PostResponseModel
 import com.akashgarg.sample.restclient.apis.Api
 import com.akashgarg.sample.ui.activity.MainActivity
@@ -12,7 +13,6 @@ import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.TestObserver
 import io.reactivex.schedulers.Schedulers
-import okhttp3.OkHttpClient
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,8 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 @RunWith(MockitoJUnitRunner::class)
-class UsersPostPresenterTest {
-
+class SinglePostPresenterTest {
     private val STRING_UNKNOWN_ERROR = "STRING_UNKNOWN_ERROR"
 
     @Mock
@@ -38,58 +37,53 @@ class UsersPostPresenterTest {
     @Mock
     lateinit var mActivity: MainActivity
 
-    lateinit var usersPostPresenter: UsersPostPresenter
-
     lateinit var retrofit: Retrofit
+
+    lateinit var usersPostPresenter: SinglePostPresenter
+
+    var pID = 1
 
     @Before
     fun setUp() {
-
-        //init mock
         MockitoAnnotations.initMocks(this)
-
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler -> Schedulers.trampoline() }
 
         retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(Gson()))
             .baseUrl(Urls.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(OkHttpClient())
             .build()
 
         mActivity.showLoading()
-        usersPostPresenter = UsersPostPresenter(retrofit, baseView, postView)
+        usersPostPresenter = SinglePostPresenter(retrofit, baseView, postView, pID)
     }
 
-
     @Test
-    fun getPostList_WhenApiInvoke() {
-        getPostsList()
+    fun getSinglePost_WhenApisInvoke() {
+        getPost()
         mActivity.dismissLoading()
     }
 
-    @Test
-    fun getPostsList() {
 
-//        Mockito.`when`(mActivity.getString(com.akashgarg.sample.R.string.error_msg)).thenReturn(STRING_UNKNOWN_ERROR)
+    @SuppressLint("CheckResult")
+    fun getPost() {
 
         // Create the testObserver for response
-        val observer = TestObserver<List<PostResponseModel>>()
+        val observer = TestObserver<PostResponseModel>()
 
         getPostsObservable()
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(observer)
 
+//        Mockito.`when`(mActivity.getString(com.akashgarg.sample.R.string.error_msg)).thenReturn(STRING_UNKNOWN_ERROR)
 
         // dispose the Observer Or CleanUp
         observer.dispose()
-
     }
 
-    private fun getPostsObservable(): Observable<List<PostResponseModel>> {
+    private fun getPostsObservable(): Observable<PostResponseModel> {
         val api = retrofit.create(Api::class.java)
-        return api.postsList
+        return api.post(pID)
     }
 }
-
