@@ -314,9 +314,11 @@ The Model-View-Presenter pattern allows to separate the presentation layer from 
   
   **Screen Shots:** 
    
- ![Screenshot](https://github.com/er-akashgarg/Babylon-playground/blob/master/app/screenshots/shot1.png)
- ![Screenshot](https://github.com/er-akashgarg/Babylon-playground/blob/master/app/screenshots/shot2.png)
- ![Screenshot](https://github.com/er-akashgarg/Babylon-playground/blob/master/app/screenshots/shot3.png)
+   <div class="row">
+<img src="https://github.com/er-akashgarg/Babylon-playground/blob/master/app/screenshots/shot1.png" width="250" height="390" />
+<img src="https://github.com/er-akashgarg/Babylon-playground/blob/master/app/screenshots/shot2.png" width="250" height="390" />
+<img src="https://github.com/er-akashgarg/Babylon-playground/blob/master/app/screenshots/shot3.png" width="250" height="390" />
+</div>
 
 
    
